@@ -1,0 +1,26 @@
+{
+  "name": "pwsonline",
+  "version": "1.0.0",
+  "description": "PWS semester project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/mariusz.jarocki/pwsonline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/mariusz.jarocki/pwsonline/issues"
+  },
+  "homepage": "https://gitlab.com/mariusz.jarocki/pwsonline#readme",
+  "dependencies": {
+    "cookies": "^0.8.0",
+    "mongodb": "^3.6.3",
+    "node-static": "^0.7.11",
+    "uuid": "^8.3.1"
+  }
+}

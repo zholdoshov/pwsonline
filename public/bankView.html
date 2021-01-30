@@ -1,0 +1,47 @@
+<h1>Bank</h1>
+
+<table class="table table-stripped table-hover">
+    <tr ng-click="ctrl.selectedIndex = -1">
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Year of birth</th>
+        <th>email</th>
+        <th>Balance</th>
+    </tr>
+    <tr ng-repeat="person in ctrl.person" ng-click="ctrl.select($index)" ng-class="{ 'rowSelected': ctrl.selectedIndex == $index }">
+        <td ng-bind="person.firstName"></td>
+        <td ng-bind="person.lastName"></td>
+        <td ng-bind="person.year"></td>
+        <td ng-bind="person.email"></td>
+        <td ng-bind="person.balance"></td>
+    </tr>
+</table>
+
+<hr/>
+
+<table class="table table-stripped table-condensed" ng-if="ctrl.selectedIndex >= 0">
+    <tr>
+        <th>Date</th>
+        <th>Balance before</th>
+        <th>Amount</th>
+        <th>Balance after</th>
+    </tr>
+    <tr ng-repeat="transfer in ctrl.transfers">
+        <td ng-bind="ctrl.formatDateTime(transfer.when)"></td>
+        <td align="right" ng-bind="transfer.balance_before"></td>
+        <td align="right" ng-bind="transfer.amount"></td>
+        <td align="right" ng-bind="transfer.balance_after"></td>
+    </tr>
+</table>
+
+<hr/>
+
+<form class="form form-inline">
+    <input class="form-control" type="text" ng-model="ctrl.singlePerson.firstName"/>
+    <input class="form-control" type="text" ng-model="ctrl.singlePerson.lastName"/>
+    <input class="form-control" type="number" ng-model="ctrl.singlePerson.year"/>
+    <input class="form-control" type="text" ng-model="ctrl.singlePerson.email"/>
+    <button class="btn btn-success fa fa-edit" ng-click="ctrl.update()" ng-disabled="ctrl.selectedIndex < 0"></button>
+    <button class="btn btn-danger fa fa-trash" ng-click="ctrl.delete()" ng-disabled="ctrl.selectedIndex < 0"></button>
+    <button class="btn btn-primary fa fa-plus" ng-click="ctrl.insert()"></button>
+</form>

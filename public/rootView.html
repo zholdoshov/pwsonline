@@ -1,0 +1,15 @@
+<form class="form form-inline">
+
+    <div ng-if="!ctrl.sessionData.email">
+        <input class="form-control" type="text" ng-model="ctrl.credentials.login" placeholder="login"/>
+        <input class="form-control" type="password" ng-model="ctrl.credentials.password" placeholder="password"/>
+        <button class="btn btn-success fa fa-sign-in" ng-click="ctrl.login()"></button>
+    </div>
+
+    <div ng-if="ctrl.sessionData.email">
+        Welcome on board, <i ng-bind="ctrl.sessionData.firstName"></i>
+        <br/><br/>
+        <button class="btn btn-danger fa fa-sign-out" ng-click="ctrl.logout()"></button>
+    </div>
+
+</form>
