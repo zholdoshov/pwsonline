@@ -3,7 +3,7 @@ var app = angular.module('pwsonline')
 app.controller('BankCtrl', [ '$http', 'common', function($http, common) {
     console.log('Bank controller started')
     var ctrl = this
-
+    ctrl.search=""
     ctrl.selectedIndex = -1
 
     ctrl.singlePerson = {
@@ -13,13 +13,15 @@ app.controller('BankCtrl', [ '$http', 'common', function($http, common) {
         email: '',
         balance: 0
     }
-
-    $http.get('/person').then(
+ctrl.load = function(){
+    $http.get('/person?search='+ctrl.search).then(
         function(res) {
             ctrl.person = res.data
+            console.log(ctrl.search)
         },
         function(err) {}
     )
+}
    
     ctrl.update = function() {
         $http.put('/person?_id=' + ctrl.person[ctrl.selectedIndex]._id, ctrl.singlePerson).then(
@@ -74,5 +76,5 @@ app.controller('BankCtrl', [ '$http', 'common', function($http, common) {
     }
 
     ctrl.formatDateTime = common.formatDateTime
-
+ ctrl.load();
 }])

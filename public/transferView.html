@@ -1,12 +1,14 @@
 <table class="table table-stripped table-condensed">
     <tr>
         <th>Date</th>
+        <th>Cooperant</th>
         <th>Balance before</th>
         <th>Amount</th>
         <th>Balance after</th>
     </tr>
     <tr ng-repeat="transfer in ctrl.transfers">
         <td ng-bind="ctrl.formatDateTime(transfer.when)"></td>
+        <td ng-bind="transfer.firstName + ' ' + transfer.lastName"></td>
         <td align="right" ng-bind="transfer.balance_before"></td>
         <td align="right" ng-bind="transfer.amount"></td>
         <td align="right" ng-bind="transfer.balance_after"></td>
@@ -19,5 +21,5 @@
     <select class="form-control" ng-model="ctrl.recipient" ng-options="option.firstName+' '+option.lastName for option in ctrl.recipients track by option._id">
     </select>
     <input class="form-control" type="number" ng-model="ctrl.transfer.amount"/>
-    <button class="btn btn-success" ng-click="ctrl.doTransfer()">Transfer</button>
+    <button class="btn btn-success" ng-click="ctrl.doTransfer()" ng-disabled="ctrl.transfer.amount <= 0">Transfer</button>
 </form>

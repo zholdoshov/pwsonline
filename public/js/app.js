@@ -1,4 +1,4 @@
-var app = angular.module('pwsonline', [ 'ngRoute', 'ngSanitize' ])
+var app = angular.module('pwsonline', [ 'ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap' ])
 
 app.constant('routes', [
     { route: '/', templateUrl: 'rootView.html', controller: 'RootCtrl', controllerAs: 'ctrl', menu: '<i class="fa fa-lg fa-home"></i>' },
@@ -20,6 +20,8 @@ app.controller('MainCtrl',  [ '$scope', '$location', '$http', 'routes', 'common'
 
     var ctrl = this
 
+    ctrl.alert = common.alert
+    ctrl.message = common.message
     ctrl.menu = common.menu
 
     $http.get('/login').then(
@@ -42,6 +44,10 @@ app.controller('MainCtrl',  [ '$scope', '$location', '$http', 'routes', 'common'
     ctrl.navClass = function(page) {
         return page === $location.path() ? 'active' : ''
     }
+
+    ctrl.closeAlert = function() {
+        ctrl.alert.text = ''
+    }
     
 }])
 
@@ -50,6 +56,8 @@ app.service('common', [ '$http', '$location', 'routes', function($http, $locatio
     
     var common = this
 
+    common.alert = { text: '', type: 'alert-success' }
+    common.message = { style: '', text: ''}
     common.menu = []
 
     common.sessionData = {

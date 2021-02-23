@@ -15,8 +15,16 @@ app.controller('RootCtrl', [ '$http', 'common', function($http, common) {
                 ctrl.sessionData.firstName = res.data.firstName
                 ctrl.sessionData.role = res.data.role
                 common.rebuildMenu()
+                common.alert.text = 'Welcome, ' + ctrl.sessionData.firstName + '!'
+                common.alert.style = 'alert-success'
+
             },
-            function(err) {}
+            function(err) {
+                // common.message.text = 'Wrong credentials'
+                // common.message.style = 'label-danger'
+                common.alert.text = 'Login failed, try again'
+                common.alert.style = 'alert-warning'
+            }
         )
     }
 
@@ -30,5 +38,9 @@ app.controller('RootCtrl', [ '$http', 'common', function($http, common) {
             },
             function(err) {}
         )
+    }
+
+    ctrl.clearMessage = function() {
+        common.message.text = ''
     }
 }])

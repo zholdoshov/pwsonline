@@ -14,10 +14,16 @@ module.exports = {
                         }
                     })
                 } else {
-                    collection.find({}).toArray(function(err, result) {
+                    collection.find({
+                        $or: [
+                            {firstName:{ $regex : new RegExp(env.parsedUrl.query.search, 'i')}},
+                            {lastName: {$regex : new RegExp(env.parsedUrl.query.search,'i')}}
+                        ]
+                    }).toArray(function(err, result) {
                         if(err) {
                             lib.serveError(env.res, 400)
                         } else {
+                            console.log(env.parsedUrl.query.search)
                             lib.serveJson(env.res, result)
                         }
                     })

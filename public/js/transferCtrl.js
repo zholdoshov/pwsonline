@@ -15,8 +15,13 @@ app.controller('TransferCtrl', [ '$http', 'common', function($http, common) {
         $http.post('/transfer?_id=' + ctrl.recipient._id, ctrl.transfer).then(
             function(res) {
                 refreshTransfers()
+                common.alert.text = 'Transfer succeded'
+                common.alert.style = 'alert-success'
             },
-            function(err) {}    
+            function(err) {
+                common.alert.text = err.data.error
+                common.alert.style = 'alert-danger'
+            }    
         )
     }
 

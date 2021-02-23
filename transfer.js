@@ -9,7 +9,40 @@ module.exports = {
         }
         switch(env.req.method) {
             case 'GET':
-                db.history.find({ who: env._id }).toArray(function(err, result) {
+                db.history.aggregate([{$match: {
+                    $or: [
+                    { sender: env.sessionData._id },
+                    { recipient: env.sessionData._id }
+                    ]
+                  }}, {$set: {
+                    amount: { $cond: {
+                      if: { $eq: ["$sender",env.sessionData._id] },
+                      then: { $multiply: [-1, "$amount"] },
+                      else: "$amount"
+                    }}
+                  }}, {$addFields: {
+                    cooperant: { $cond: {
+                      if: { $eq: ["$sender",env.sessionData._id] },
+                      then: "$recipient",
+                      else: "$sender"
+                    }}
+                  }}, {$project: {
+                    sender: false,
+                    recipient: false
+                  }}, {$lookup: {
+                    from: 'persons',
+                    localField: 'cooperant',
+                    foreignField: '_id',
+                    as: 'cooperant_data'
+                  }}, {$unwind: {
+                    path: "$cooperant_data"
+                  }}, {$set: {
+                    firstName: "$cooperant_data.firstName",
+                    lastName: "$cooperant_data.lastName"
+                  }}, {$project: {
+                    cooperant: false,
+                    cooperant_data: false
+                  }}]).toArray(function(err, result) {
                     if(err) {
                         lib.serveError(env.res, 400)
                     } else {
@@ -57,6 +90,7 @@ module.exports = {
                             amount: env.parsedPayload.amount
                         }
                         db.history.insertOne(operation)
+                        lib.serveJson(env.res, operation)
                     })
                 })
 

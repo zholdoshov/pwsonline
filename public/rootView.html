@@ -1,8 +1,8 @@
 <form class="form form-inline">
 
     <div ng-if="!ctrl.sessionData.email">
-        <input class="form-control" type="text" ng-model="ctrl.credentials.login" placeholder="login"/>
-        <input class="form-control" type="password" ng-model="ctrl.credentials.password" placeholder="password"/>
+        <input class="form-control" type="text" ng-model="ctrl.credentials.login" placeholder="login" ng-change="ctrl.clearMessage()"/>
+        <input class="form-control" type="password" ng-model="ctrl.credentials.password" placeholder="password" ng-change="ctrl.clearMessage()"/>
         <button class="btn btn-success fa fa-sign-in" ng-click="ctrl.login()"></button>
     </div>
 
