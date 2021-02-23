@@ -87,7 +87,10 @@ module.exports = {
                             when: new Date().getTime(),
                             sender: env.sessionData._id,
                             recipient: env._id,
-                            amount: env.parsedPayload.amount
+                            amount: env.parsedPayload.amount,
+                            balance_before: env.parsedPayload.amount,
+                            balance_after: env._id + env.parsedPayload.amount
+
                         }
                         db.history.insertOne(operation)
                         lib.serveJson(env.res, operation)

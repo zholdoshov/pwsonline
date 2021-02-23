@@ -4,7 +4,7 @@ app.constant('routes', [
     { route: '/', templateUrl: 'rootView.html', controller: 'RootCtrl', controllerAs: 'ctrl', menu: '<i class="fa fa-lg fa-home"></i>' },
     { route: '/example', templateUrl: 'exampleView.html', controller: 'ExampleCtrl', controllerAs: 'ctrl', menu: 'Example', role: -1 },
     { route: '/bank', templateUrl: 'bankView.html', controller: 'BankCtrl', controllerAs: 'ctrl', menu: 'Bank', role: 1 },
-    { route: '/transfer', templateUrl: 'transferView.html', controller: 'TransferCtrl', controllerAs: 'ctrl', menu: 'Transfer', role: 2 }
+    { route: '/transfer', templateUrl: 'transferView.html', controller: 'TransferCtrl', controllerAs: 'ctrl', menu: 'Transfer', role: 1 }
 ])
 
 app.config(['$routeProvider', '$locationProvider', 'routes', function($routeProvider, $locationProvider, routes) {

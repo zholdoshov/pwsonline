@@ -9,9 +9,9 @@
     <tr ng-repeat="transfer in ctrl.transfers">
         <td ng-bind="ctrl.formatDateTime(transfer.when)"></td>
         <td ng-bind="transfer.firstName + ' ' + transfer.lastName"></td>
-        <td align="right" ng-bind="transfer.balance_before"></td>
-        <td align="right" ng-bind="transfer.amount"></td>
-        <td align="right" ng-bind="transfer.balance_after"></td>
+        <td ng-bind="transfer.balance_before"></td>
+        <td ng-bind="transfer.amount"></td>
+        <td ng-bind="transfer.balance_after"></td>
     </tr>
 </table>
 
