@@ -3,6 +3,7 @@ var db = require('./db')
 
 module.exports = {
     perform: function(env) {
+      console.log(env.sessionData);
         if(env.sessionData.role < 1) {
             lib.serveError(env.res, 403)
             return
@@ -68,6 +69,7 @@ module.exports = {
                         return
                     }
                     db.persons.findOne({ _id: env.sessionData._id }, function(err, senderData) {
+                      var balanceQ = senderData.balance;
                         if(err || !senderData) {
                             lib.serveError(env.res, 404) // sender does not exist
                             return
@@ -88,8 +90,8 @@ module.exports = {
                             sender: env.sessionData._id,
                             recipient: env._id,
                             amount: env.parsedPayload.amount,
-                            balance_before: env.parsedPayload.amount,
-                            balance_after: env._id + env.parsedPayload.amount
+                            balance_before: balanceQ,
+                            balance_after: balanceQ - env.parsedPayload.amount
 
                         }
                         db.history.insertOne(operation)
