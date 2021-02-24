@@ -43,10 +43,10 @@
 <hr/>
 
 <form class="form form-inline">
-    <input class="form-control" type="text" ng-model="ctrl.singlePerson.firstName"/>
-    <input class="form-control" type="text" ng-model="ctrl.singlePerson.lastName"/>
-    <input class="form-control" type="number" ng-model="ctrl.singlePerson.year"/>
-    <input class="form-control" type="text" ng-model="ctrl.singlePerson.email"/>
+    <input class="form-control" type="text" placeholder="First Name" ng-model="ctrl.singlePerson.firstName"/>
+    <input class="form-control" type="text" placeholder="Last Name" ng-model="ctrl.singlePerson.lastName"/>
+    <input class="form-control" type="number" placeholder="Year of Birth" ng-model="ctrl.singlePerson.year"/>
+    <input class="form-control" type="text" placeholder="email" ng-model="ctrl.singlePerson.email"/>
     <button class="btn btn-success fa fa-edit" ng-click="ctrl.update()" ng-disabled="ctrl.selectedIndex < 0"></button>
     <button class="btn btn-danger fa fa-trash" ng-click="ctrl.delete()" ng-disabled="ctrl.selectedIndex < 0"></button>
     <button class="btn btn-primary fa fa-plus" ng-click="ctrl.insert()"></button>

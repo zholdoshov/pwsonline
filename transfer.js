@@ -69,7 +69,6 @@ module.exports = {
                         return
                     }
                     db.persons.findOne({ _id: env.sessionData._id }, function(err, senderData) {
-                      var balanceQ = senderData.balance;
                         if(err || !senderData) {
                             lib.serveError(env.res, 404) // sender does not exist
                             return
@@ -90,9 +89,8 @@ module.exports = {
                             sender: env.sessionData._id,
                             recipient: env._id,
                             amount: env.parsedPayload.amount,
-                            balance_before: balanceQ,
-                            balance_after: balanceQ - env.parsedPayload.amount
-
+                            balance_before: senderData.balance,
+                            balance_after: senderData.balance - env.parsedPayload.amount
                         }
                         db.history.insertOne(operation)
                         lib.serveJson(env.res, operation)
